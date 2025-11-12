@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "build": 1,
   "generated_at": "2025-11-12T15:42:16Z",
   "schema": 1,
   "providers": [
