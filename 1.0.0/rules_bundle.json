@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-11-12T15:42:16Z",
+  "schema": 1,
+  "providers": [
+    {
+      "id": "meta",
+      "name": "Meta",
+      "apps": [
+        "Facebook",
+        "Instagram",
+        "Threads"
+      ],
+      "domains": [
+        "facebook.com",
+        "instagram.com",
+        "threads.net"
+      ],
+      "status": "watch",
+      "notes": "Starter record for app demo & update flow."
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "apps": [
+        "LinkedIn"
+      ],
+      "domains": [
+        "linkedin.com"
+      ],
+      "status": "watch",
+      "notes": "Starter record for app demo & update flow."
+    },
+    {
+      "id": "vinted",
+      "name": "Vinted",
+      "apps": [
+        "Vinted"
+      ],
+      "domains": [
+        "vinted.com",
+        "vinted.nl"
+      ],
+      "status": "watch",
+      "notes": "Starter record for app demo & update flow."
+    }
+  ],
+  "news": [
+    {
+      "id": "welcome-1",
+      "date": "2025-11-12",
+      "title": "Initial bundle published",
+      "summary": "Use this to test the app's update & signature verification flow.",
+      "url": "https://example.org/bundles/1.0.0"
+    }
+  ]
+}
