@@ -1,58 +1,1581 @@
 {
   "version": "1.0.0",
-  "build": 1,
-  "generated_at": "2025-11-12T15:42:16Z",
+  "build": 9,
+  "generated_at": "2025-11-13T12:00:00Z",
+  "last_updated": "2025-11-13T14:46:37Z",
   "schema": 1,
-  "providers": [
+  "signature": "placeholder_signature_for_demo",
+  "services": [
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "category": "social_media",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "tiktok_q1",
+          "text": "Do you have a TikTok account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "tiktok_q2",
+          "text": "Did you create your TikTok account before January 1, 2023?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "tiktok_q1"
+          ]
+        },
+        {
+          "id": "tiktok_q3",
+          "text": "Did you post videos on TikTok?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "tiktok_q1",
+            "tiktok_q2"
+          ]
+        },
+        {
+          "id": "tiktok_q4",
+          "text": "Have any of your TikTok videos ever gone viral (gained significant views)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "tiktok_q1",
+            "tiktok_q3"
+          ]
+        },
+        {
+          "id": "tiktok_q5",
+          "text": "Do you frequently like or comment on TikTok videos?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "tiktok_q1"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_tiktok_no_acc",
+          "if_all": [
+            "tiktok_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No TikTok account, no data used"
+        },
+        {
+          "id": "rule_tiktok_likely_old_active",
+          "if_all": [
+            "tiktok_q1==yes",
+            "tiktok_q2==yes",
+            "tiktok_q3==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "Older account with active posting; data very likely used for AI training"
+        },
+        {
+          "id": "rule_tiktok_uncertain_old_engage",
+          "if_all": [
+            "tiktok_q1==yes",
+            "tiktok_q2==yes",
+            "tiktok_q3==no",
+            "tiktok_q5==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "Older account with engagement but little posting; some data used"
+        },
+        {
+          "id": "rule_tiktok_uncertain_new_active",
+          "if_all": [
+            "tiktok_q1==yes",
+            "tiktok_q2==no",
+            "tiktok_q3==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.5,
+          "explanation": "Newer account with active posts; data possibly used to a moderate extent"
+        },
+        {
+          "id": "rule_tiktok_unlikely_passive",
+          "if_all": [
+            "tiktok_q1==yes",
+            "tiktok_q3==no",
+            "tiktok_q5==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "Account exists but minimal activity; data unlikely used in training"
+        }
+      ],
+      "action": {
+        "can_opt_out": false,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Make Account Private",
+            "description": "In TikTok settings, set your account to Private so your content isn't publicly accessible.",
+            "url": "https://support.tiktok.com/en/account-and-privacy/account-privacy-settings"
+          },
+          {
+            "id": "step2",
+            "title": "Manage Content",
+            "description": "Consider deleting or making private any past videos you don't want used for AI or algorithm training."
+          },
+          {
+            "id": "step3",
+            "title": "Limit Personalization",
+            "description": "Under Settings > Privacy > Ads, disable personalized ads to reduce data usage for targeting algorithms."
+          }
+        ],
+        "links": [
+          {
+            "label": "TikTok Privacy Policy",
+            "url": "https://www.tiktok.com/legal/privacy-policy"
+          }
+        ],
+        "templates": []
+      }
+    },
+    {
+      "id": "snapchat",
+      "name": "Snapchat",
+      "category": "social_media",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "snapchat_q1",
+          "text": "Do you have a Snapchat account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "snapchat_q2",
+          "text": "Did you create your Snapchat account before January 1, 2023?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "snapchat_q1"
+          ]
+        },
+        {
+          "id": "snapchat_q3",
+          "text": "Do you frequently share Snaps or Stories on Snapchat (with friends or publicly)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "snapchat_q1"
+          ]
+        },
+        {
+          "id": "snapchat_q4",
+          "text": "Have you used Snapchat's My AI chatbot?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "snapchat_q1"
+          ]
+        },
+        {
+          "id": "snapchat_q5",
+          "text": "Have you posted content to Snapchat Spotlight or other public Snap maps?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "snapchat_q1"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_snap_no_acc",
+          "if_all": [
+            "snapchat_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No Snapchat account, no data can be used"
+        },
+        {
+          "id": "rule_snap_likely_active",
+          "if_all": [
+            "snapchat_q1==yes",
+            "snapchat_q2==yes",
+            "snapchat_q3==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "Long-time user with frequent posts; high chance data is used to train algorithms"
+        },
+        {
+          "id": "rule_snap_uncertain_public_ai",
+          "if_all": [
+            "snapchat_q1==yes",
+            "snapchat_q2==yes",
+            "snapchat_q3==no",
+            "snapchat_q5==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "Older account with some public content; moderate chance data contributes to training"
+        },
+        {
+          "id": "rule_snap_uncertain_myAI",
+          "if_all": [
+            "snapchat_q1==yes",
+            "snapchat_q2==yes",
+            "snapchat_q4==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.5,
+          "explanation": "Used My AI chatbot; conversations might be used for AI improvements"
+        },
+        {
+          "id": "rule_snap_unlikely_passive",
+          "if_all": [
+            "snapchat_q1==yes",
+            "snapchat_q3==no",
+            "snapchat_q4==no",
+            "snapchat_q5==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "Account exists with minimal sharing; data unlikely used in AI training"
+        }
+      ],
+      "action": {
+        "can_opt_out": false,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Limit Data Sharing",
+            "description": "Avoid using public features (like Spotlight) if you don't want your content used in training algorithms."
+          },
+          {
+            "id": "step2",
+            "title": "Object to Data Use (EU Only)",
+            "description": "EU users can formally object to Snapchat's data processing by submitting a request via Snapchat's privacy support form, asking to not use their data for AI training.",
+            "url": "https://help.snapchat.com/hc/en-us/articles/22534988598676-Learn-About-Snap-s-Data-Processing-and-How-to-Object"
+          }
+        ],
+        "links": [
+          {
+            "label": "Snapchat Privacy Policy",
+            "url": "https://values.snap.com/privacy/privacy-center"
+          }
+        ],
+        "templates": []
+      }
+    },
+    {
+      "id": "twitter",
+      "name": "Twitter (X)",
+      "category": "social_media",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "twitter_q1",
+          "text": "Do you have a Twitter (X) account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "twitter_q2",
+          "text": "Did you create your Twitter/X account before January 1, 2024?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "twitter_q1"
+          ]
+        },
+        {
+          "id": "twitter_q3",
+          "text": "Have you posted Tweets or other content on Twitter (X)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "twitter_q1"
+          ]
+        },
+        {
+          "id": "twitter_q4",
+          "text": "Do you regularly like, retweet, or reply to posts on Twitter?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "twitter_q1"
+          ]
+        },
+        {
+          "id": "twitter_q5",
+          "text": "Have you used X's AI chatbot (e.g., Grok) or other AI features on the platform?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "twitter_q1"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_twitter_no_acc",
+          "if_all": [
+            "twitter_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No Twitter account means no data used"
+        },
+        {
+          "id": "rule_twitter_likely_active",
+          "if_all": [
+            "twitter_q1==yes",
+            "twitter_q2==yes",
+            "twitter_q3==yes",
+            "twitter_q4==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "Established user with posts and interactions; data very likely used for AI model training"
+        },
+        {
+          "id": "rule_twitter_uncertain_engager",
+          "if_all": [
+            "twitter_q1==yes",
+            "twitter_q2==yes",
+            "twitter_q3==no",
+            "twitter_q4==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "Older account with mainly interactions (likes/replies); some data used to personalize AI"
+        },
+        {
+          "id": "rule_twitter_uncertain_newposts",
+          "if_all": [
+            "twitter_q1==yes",
+            "twitter_q2==no",
+            "twitter_q3==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.5,
+          "explanation": "Newer account with content posted; moderate chance data is being used in training"
+        },
+        {
+          "id": "rule_twitter_unlikely_light",
+          "if_all": [
+            "twitter_q1==yes",
+            "twitter_q3==no",
+            "twitter_q4==no",
+            "twitter_q5==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "Account exists but low activity; data unlikely used for AI training"
+        }
+      ],
+      "action": {
+        "can_opt_out": true,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Opt-Out in Settings (Web Only)",
+            "description": "On the web version of X, go to Settings & Privacy > Privacy and Safety > Data Sharing and AI Training. Disable the option that allows X to use your posts and interactions for AI training (uncheck the box for Grok data training)."
+          },
+          {
+            "id": "step2",
+            "title": "Delete AI Interactions",
+            "description": "If you've used X's Grok chatbot, you can erase your chat history with it in the same settings menu by selecting 'Delete conversation history.'"
+          }
+        ],
+        "links": [
+          {
+            "label": "X Privacy Policy (Data Use)",
+            "url": "https://x.com/en/privacy"
+          }
+        ],
+        "templates": []
+      }
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest",
+      "category": "social_media",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "pinterest_q1",
+          "text": "Do you have a Pinterest account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "pinterest_q2",
+          "text": "Did you create your Pinterest account before January 1, 2024?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "pinterest_q1"
+          ]
+        },
+        {
+          "id": "pinterest_q3",
+          "text": "Have you uploaded or saved Pins (images) on Pinterest?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "pinterest_q1"
+          ]
+        },
+        {
+          "id": "pinterest_q4",
+          "text": "Do you frequently use Pinterest (browse or pin on a weekly basis)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "pinterest_q1"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_pinterest_no_acc",
+          "if_all": [
+            "pinterest_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No Pinterest account, no data to use"
+        },
+        {
+          "id": "rule_pinterest_likely_active",
+          "if_all": [
+            "pinterest_q1==yes",
+            "pinterest_q2==yes",
+            "pinterest_q3==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "Older account with content added; data likely used for AI (e.g., training recommendation or vision models)"
+        },
+        {
+          "id": "rule_pinterest_uncertain_regular",
+          "if_all": [
+            "pinterest_q1==yes",
+            "pinterest_q2==yes",
+            "pinterest_q3==no",
+            "pinterest_q4==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "Older account with regular activity but mainly browsing; some data may feed into AI systems"
+        },
+        {
+          "id": "rule_pinterest_uncertain_new_content",
+          "if_all": [
+            "pinterest_q1==yes",
+            "pinterest_q2==no",
+            "pinterest_q3==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.5,
+          "explanation": "Newer account that adds pins; moderate chance data is used as Pinterest develops AI models"
+        },
+        {
+          "id": "rule_pinterest_unlikely_light",
+          "if_all": [
+            "pinterest_q1==yes",
+            "pinterest_q3==no",
+            "pinterest_q4==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "Account exists with minimal pinning or activity; data unlikely used for AI training"
+        }
+      ],
+      "action": {
+        "can_opt_out": true,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Disable AI Data Usage",
+            "description": "Log in and go to Settings > Privacy & Data on Pinterest. Turn off the setting labeled 'Use your data to train Pinterest Canvas' to opt out of having your pins used for AI training.",
+            "url": "https://help.pinterest.com/en/article/manage-genai-settings"
+          }
+        ],
+        "links": [
+          {
+            "label": "Pinterest Privacy Policy",
+            "url": "https://policy.pinterest.com/en/privacy-policy"
+          }
+        ],
+        "templates": []
+      }
+    },
+    {
+      "id": "vimeo",
+      "name": "Vimeo",
+      "category": "social_media",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "vimeo_q1",
+          "text": "Do you have a Vimeo account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "vimeo_q2",
+          "text": "Did you create your Vimeo account before January 1, 2023?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vimeo_q1"
+          ]
+        },
+        {
+          "id": "vimeo_q3",
+          "text": "Have you uploaded any videos to Vimeo?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vimeo_q1"
+          ]
+        },
+        {
+          "id": "vimeo_q4",
+          "text": "Are any of your Vimeo videos public (viewable by anyone)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vimeo_q1",
+            "vimeo_q3"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_vimeo_no_acc",
+          "if_all": [
+            "vimeo_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No Vimeo account means no data is used"
+        },
+        {
+          "id": "rule_vimeo_uncertain_public",
+          "if_all": [
+            "vimeo_q1==yes",
+            "vimeo_q3==yes",
+            "vimeo_q4==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.4,
+          "explanation": "Uploaded public videos; slight risk of external AI scraping, although Vimeo itself doesn't use them for training without consent"
+        },
+        {
+          "id": "rule_vimeo_unlikely_private",
+          "if_all": [
+            "vimeo_q1==yes",
+            "vimeo_q3==yes",
+            "vimeo_q4==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "Uploaded videos but kept them private; content not used for AI training"
+        },
+        {
+          "id": "rule_vimeo_unlikely_none",
+          "if_all": [
+            "vimeo_q1==yes",
+            "vimeo_q3==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.9,
+          "explanation": "Has an account but no uploads; essentially no content available to train AI"
+        }
+      ],
+      "action": {
+        "can_opt_out": true,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Content Control",
+            "description": "By default, Vimeo does NOT use your videos to train AI without permission. No action needed unless you've explicitly consented elsewhere."
+          }
+        ],
+        "links": [
+          {
+            "label": "Vimeo – Position on AI",
+            "url": "https://vimeo.com/blog/post/vimeos-position-on-ai"
+          }
+        ],
+        "templates": []
+      }
+    },
     {
       "id": "meta",
-      "name": "Meta",
-      "apps": [
-        "Facebook",
-        "Instagram",
-        "Threads"
+      "name": "Meta (Facebook/Instagram)",
+      "category": "social_media",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
       ],
-      "domains": [
-        "facebook.com",
-        "instagram.com",
-        "threads.net"
+      "questions": [
+        {
+          "id": "meta_q1",
+          "text": "Did you create a Facebook account before January 1, 2023?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "meta_q2",
+          "text": "Have you posted content (photos, videos, or text) on Facebook or Instagram?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "meta_q1"
+          ]
+        }
       ],
-      "status": "watch",
-      "notes": "Starter record for app demo & update flow."
+      "rules": [
+        {
+          "id": "rule_meta_likely",
+          "if_all": [
+            "meta_q1==yes",
+            "meta_q2==yes"
+          ],
+          "result": "likely",
+          "weight": 0.8,
+          "explanation": "Users who created accounts before 2023 and posted content are highly likely to have their data used in AI training."
+        }
+      ],
+      "action": {
+        "can_opt_out": true,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Access your privacy settings",
+            "description": "Go to Settings & Privacy > Settings > Your Facebook Information",
+            "url": "https://www.facebook.com/settings"
+          },
+          {
+            "id": "step2",
+            "title": "Download your information",
+            "description": "Request a copy of all your data to understand what's been collected",
+            "url": "https://www.facebook.com/dyi/"
+          },
+          {
+            "id": "step3",
+            "title": "Submit GDPR request",
+            "description": "Use our template to request deletion of your data",
+            "template_id": "gdpr_meta_deletion"
+          }
+        ],
+        "links": [
+          {
+            "label": "Privacy Policy",
+            "url": "https://www.facebook.com/privacy/policy/"
+          },
+          {
+            "label": "Data Download Tool",
+            "url": "https://www.facebook.com/dyi/"
+          }
+        ],
+        "templates": [
+          {
+            "id": "gdpr_meta_deletion",
+            "title": "GDPR Data Deletion Request - Meta",
+            "body_markdown": "# GDPR Right to Erasure Request\n\n**To:** Meta Platforms Ireland Limited\n**Subject:** Request for erasure of personal data under Article 17 GDPR\n\nDear Data Protection Officer,\n\nI am writing to exercise my right to erasure (right to be forgotten) under Article 17 of the GDPR.\n\nPlease delete all personal data you hold about me, including any data used for AI training purposes.\n\n**My personal details:**\n- Name: [Your Full Name]\n- Email: [Your Email Address]\n- Account ID: [If known]\n- Country: [Your Country]\n\nI request confirmation of deletion within 30 days.\n\nSincerely,\n[Your Full Name]"
+          }
+        ]
+      }
     },
     {
       "id": "linkedin",
       "name": "LinkedIn",
-      "apps": [
-        "LinkedIn"
+      "category": "professional_network",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
       ],
-      "domains": [
-        "linkedin.com"
+      "questions": [
+        {
+          "id": "linkedin_q1",
+          "text": "Do you have a LinkedIn account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "linkedin_q2",
+          "text": "Did you create your LinkedIn account before November 1, 2024?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "linkedin_q1"
+          ]
+        },
+        {
+          "id": "linkedin_q3",
+          "text": "Is your LinkedIn profile (name, photo, headline, experience, education) visible to non-connections?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "linkedin_q1"
+          ]
+        },
+        {
+          "id": "linkedin_q4",
+          "text": "Have you posted or commented on LinkedIn in the last 12 months?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "linkedin_q1"
+          ]
+        },
+        {
+          "id": "linkedin_q5",
+          "text": "Have you ever used LinkedIn's AI features (e.g. AI-assisted writing or job application tools)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "linkedin_q1"
+          ]
+        }
       ],
-      "status": "watch",
-      "notes": "Starter record for app demo & update flow."
+      "rules": [
+        {
+          "id": "rule_linkedin_no_acc",
+          "if_all": [
+            "linkedin_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No LinkedIn account, so no member data is used for AI training."
+        },
+        {
+          "id": "rule_linkedin_likely_old_public_active",
+          "if_all": [
+            "linkedin_q1==yes",
+            "linkedin_q2==yes",
+            "linkedin_q3==yes",
+            "linkedin_q4==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "Long-standing, public profile with recent posts and interactions; member data is very likely used to train LinkedIn/Microsoft AI models (especially after EU expansion of AI training from late 2025)."
+        },
+        {
+          "id": "rule_linkedin_likely_old_public",
+          "if_all": [
+            "linkedin_q1==yes",
+            "linkedin_q2==yes",
+            "linkedin_q3==yes",
+            "linkedin_q4==no"
+          ],
+          "result": "likely",
+          "weight": 0.7,
+          "explanation": "Older public profile with visible career history; profile data alone can be used for AI training."
+        },
+        {
+          "id": "rule_linkedin_uncertain_private_active",
+          "if_all": [
+            "linkedin_q1==yes",
+            "linkedin_q3==no",
+            "linkedin_q4==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "Active account but profile is more restricted; some activity and profile fields may still be used for AI training."
+        },
+        {
+          "id": "rule_linkedin_unlikely_low_use",
+          "if_all": [
+            "linkedin_q1==yes",
+            "linkedin_q4==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "Account exists but with little or no recent activity; risk that your data significantly contributed to AI training is lower compared to active users."
+        }
+      ],
+      "action": {
+        "can_opt_out": true,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Change AI training setting in LinkedIn",
+            "description": "Go to Settings & Privacy → Data privacy → Data for generative AI improvement and disable the option that allows LinkedIn to use your data to improve AI models.",
+            "url": "https://www.linkedin.com/help/linkedin/answer/a8059228"
+          },
+          {
+            "id": "step2",
+            "title": "Limit profile visibility",
+            "description": "Under Settings & Privacy → Visibility, restrict who can see your profile details, posts and comments to reduce how much data can be used for AI training.",
+            "url": "https://www.linkedin.com/help/linkedin/topics/12344/12345"
+          },
+          {
+            "id": "step3",
+            "title": "Object under GDPR",
+            "description": "EU/EEA/Swiss users can use LinkedIn's data objection or privacy contact form to object to the use of your personal data for AI training under GDPR legitimate interest.",
+            "url": "https://www.linkedin.com/help/linkedin/answer/50191"
+          }
+        ],
+        "links": [
+          {
+            "label": "LinkedIn Help – Update to our Terms and data use",
+            "url": "https://www.linkedin.com/help/linkedin/answer/a8059228"
+          },
+          {
+            "label": "More info on LinkedIn AI data use (third-party explanation)",
+            "url": "https://proton.me/blog/linkedin-ai-training"
+          }
+        ],
+        "templates": []
+      }
     },
     {
       "id": "vinted",
       "name": "Vinted",
-      "apps": [
-        "Vinted"
+      "category": "marketplace",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
       ],
-      "domains": [
-        "vinted.com",
-        "vinted.nl"
+      "questions": [
+        {
+          "id": "vinted_q1",
+          "text": "Do you have a Vinted account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "vinted_q2",
+          "text": "Have you listed items for sale on Vinted (with photos and descriptions)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vinted_q1"
+          ]
+        },
+        {
+          "id": "vinted_q3",
+          "text": "Did you list items on Vinted after September 8, 2025?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vinted_q1",
+            "vinted_q2"
+          ]
+        },
+        {
+          "id": "vinted_q4",
+          "text": "Are most of your listings public and searchable on Vinted?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vinted_q1",
+            "vinted_q2"
+          ]
+        },
+        {
+          "id": "vinted_q5",
+          "text": "Do your listings contain detailed text descriptions or many photos (e.g. fashion items, products, packaging)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "vinted_q1",
+            "vinted_q2"
+          ]
+        }
       ],
-      "status": "watch",
-      "notes": "Starter record for app demo & update flow."
+      "rules": [
+        {
+          "id": "rule_vinted_no_acc",
+          "if_all": [
+            "vinted_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "No Vinted account, so no user content can be used for AI training."
+        },
+        {
+          "id": "rule_vinted_likely_post_tos_change",
+          "if_all": [
+            "vinted_q1==yes",
+            "vinted_q2==yes",
+            "vinted_q3==yes",
+            "vinted_q4==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "You posted public listings after Vinted changed its terms in 2025 to allow use of listing photos and descriptions for AI training; this content is very likely included."
+        },
+        {
+          "id": "rule_vinted_uncertain_mixed",
+          "if_all": [
+            "vinted_q1==yes",
+            "vinted_q2==yes",
+            "vinted_q3==yes",
+            "vinted_q4==no"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "You listed items after the 2025 terms change, but with more limited visibility; some of your content may still be used in AI training."
+        },
+        {
+          "id": "rule_vinted_uncertain_old_listings",
+          "if_all": [
+            "vinted_q1==yes",
+            "vinted_q2==yes",
+            "vinted_q3==no"
+          ],
+          "result": "uncertain",
+          "weight": 0.4,
+          "explanation": "You listed items before the 2025 AI-training update; older content might still be processed depending on how Vinted applies the new licence to existing listings."
+        },
+        {
+          "id": "rule_vinted_unlikely_buyer_only",
+          "if_all": [
+            "vinted_q1==yes",
+            "vinted_q2==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "You mainly buy and do not publish listings; much less of your data is available for AI training compared to active sellers."
+        }
+      ],
+      "action": {
+        "can_opt_out": false,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Remove or minimise listings",
+            "description": "Delete old listings and avoid uploading new photos or descriptions if you do not want this content to be used to train AI models under the updated 2025 terms.",
+            "url": "https://www.vinted.eu/help"
+          },
+          {
+            "id": "step2",
+            "title": "Close your Vinted account",
+            "description": "If you strongly object to AI training on your content and no in-product opt-out is offered, you can request account deletion. Under GDPR you may also request erasure of personal data.",
+            "url": "https://www.vinted.co.uk/terms_and_conditions"
+          },
+          {
+            "id": "step3",
+            "title": "Exercise GDPR rights",
+            "description": "Use Vinted's privacy/contact channels to object to the use of your personal data for AI training, citing your GDPR right to object to processing for this purpose.",
+            "url": "https://www.vinted.co.uk/privacy-policy"
+          }
+        ],
+        "links": [
+          {
+            "label": "News (NL): Vinted updates terms to use listings for AI training",
+            "url": "https://tweakers.net/nieuws/237866/vinted-past-voorwaarden-aan-om-advertenties-van-gebruikers-te-gebruiken-voor-ai.html"
+          },
+          {
+            "label": "Vinted User Terms & Conditions",
+            "url": "https://www.vinted.co.uk/terms_and_conditions"
+          }
+        ],
+        "templates": []
+      }
+    },
+    {
+      "id": "google_public",
+      "name": "Google (public web & Google services)",
+      "category": "internet_services",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "google_public_q1",
+          "text": "Do you use Google services with a personal account (for example Search, YouTube, Maps, or News)?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "google_public_q2",
+          "text": "Have you ever published public content that is indexed by Google (such as public websites, blogs, YouTube videos, or public posts)?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "google_public_q3",
+          "text": "Is your YouTube or other Google-hosted content (videos, comments, reviews) publicly visible?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "google_public_q1"
+          ]
+        },
+        {
+          "id": "google_public_q4",
+          "text": "Did you publish public content on the web after July 1, 2023?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "google_public_q2"
+          ]
+        },
+        {
+          "id": "google_public_q5",
+          "text": "Do you use experimental or beta Google AI features (e.g. Search Generative Experience, Labs, or AI writing helpers)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "google_public_q1"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_google_no_use",
+          "if_all": [
+            "google_public_q1==no",
+            "google_public_q2==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "If you neither use Google services nor publish public content indexed by Google, your data is very unlikely to be used to train Google AI models."
+        },
+        {
+          "id": "rule_google_likely_public_post_2023",
+          "if_all": [
+            "google_public_q2==yes",
+            "google_public_q4==yes"
+          ],
+          "result": "likely",
+          "weight": 0.9,
+          "explanation": "Google's 2023 privacy policy update explicitly allows using publicly available information from the web to train AI models, so public content you posted after that date is very likely included."
+        },
+        {
+          "id": "rule_google_likely_public_youtube",
+          "if_all": [
+            "google_public_q1==yes",
+            "google_public_q3==yes"
+          ],
+          "result": "likely",
+          "weight": 0.7,
+          "explanation": "Public YouTube videos, titles and descriptions can be used to improve Google services and AI models; if your content is public, it likely contributes to training."
+        },
+        {
+          "id": "rule_google_uncertain_old_public",
+          "if_all": [
+            "google_public_q2==yes",
+            "google_public_q4==no"
+          ],
+          "result": "uncertain",
+          "weight": 0.5,
+          "explanation": "Older public content may still be in datasets used to improve AI, but the exact coverage before the 2023 privacy update is less clear."
+        },
+        {
+          "id": "rule_google_unlikely_private_only",
+          "if_all": [
+            "google_public_q1==yes",
+            "google_public_q2==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.6,
+          "explanation": "You use Google products but do not publish public content; Google's main AI training on public web data is less likely to include your personal content, though some usage data may still power personalised models."
+        }
+      ],
+      "action": {
+        "can_opt_out": false,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Reduce public exposure",
+            "description": "Limit what you publish publicly (e.g. make YouTube videos unlisted or private, use privacy settings on blogs, and avoid exposing personal data in public web content).",
+            "url": "https://support.google.com/youtube/answer/157177"
+          },
+          {
+            "id": "step2",
+            "title": "Control account-level data",
+            "description": "In your Google Account → Data & privacy, turn off Web & App Activity and limit personalised ads to reduce how much of your activity is used for modelling and personalisation.",
+            "url": "https://myaccount.google.com/data-and-privacy"
+          },
+          {
+            "id": "step3",
+            "title": "Use GDPR rights",
+            "description": "EU users can request removal of certain search results and object to specific processing of personal data, although Google's use of public web content for AI training is not fully opt-out.",
+            "url": "https://support.google.com/legal/answer/3110420"
+          }
+        ],
+        "links": [
+          {
+            "label": "Google privacy policy update on AI training with public data (explainer)",
+            "url": "https://www.searchenginejournal.com/google-updates-privacy-policy-to-collect-public-data-for-ai-training/490715/"
+          },
+          {
+            "label": "Google – Privacy Policy & Terms overview",
+            "url": "https://policies.google.com/privacy"
+          }
+        ],
+        "templates": []
+      }
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom",
+      "category": "productivity",
+      "applicable_countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "questions": [
+        {
+          "id": "zoom_q1",
+          "text": "Do you use Zoom with a personal or work account?",
+          "type": "tri_boolean"
+        },
+        {
+          "id": "zoom_q2",
+          "text": "Have you hosted or joined Zoom meetings on this account since March 2023?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "zoom_q1"
+          ]
+        },
+        {
+          "id": "zoom_q3",
+          "text": "Have you used Zoom AI features (such as AI Companion / smart summaries / smart recordings)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "zoom_q1"
+          ]
+        },
+        {
+          "id": "zoom_q4",
+          "text": "Are you the administrator or owner of the Zoom account (e.g. for a company or organisation)?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "zoom_q1"
+          ]
+        },
+        {
+          "id": "zoom_q5",
+          "text": "Do you regularly record meetings to Zoom's cloud storage?",
+          "type": "tri_boolean",
+          "dependencies": [
+            "zoom_q1"
+          ]
+        }
+      ],
+      "rules": [
+        {
+          "id": "rule_zoom_no_use",
+          "if_all": [
+            "zoom_q1==no"
+          ],
+          "result": "unlikely",
+          "weight": 1.0,
+          "explanation": "If you do not use Zoom, your data is not used in Zoom's AI/ML systems."
+        },
+        {
+          "id": "rule_zoom_uncertain_ai_features",
+          "if_all": [
+            "zoom_q1==yes",
+            "zoom_q2==yes",
+            "zoom_q3==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.6,
+          "explanation": "You used Zoom's AI features after its 2023 terms and data processing changes; meeting content and metadata may be processed to provide AI-generated summaries and product improvements, but Zoom states it does not use customer content to train external AI models without consent."
+        },
+        {
+          "id": "rule_zoom_uncertain_cloud_recordings",
+          "if_all": [
+            "zoom_q1==yes",
+            "zoom_q2==yes",
+            "zoom_q5==yes"
+          ],
+          "result": "uncertain",
+          "weight": 0.5,
+          "explanation": "Cloud recordings and transcripts may be analysed for quality and product improvement under Zoom's terms; the exact extent of AI training on EU personal data remains debated."
+        },
+        {
+          "id": "rule_zoom_unlikely_basic_use",
+          "if_all": [
+            "zoom_q1==yes",
+            "zoom_q2==yes",
+            "zoom_q3==no",
+            "zoom_q5==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.7,
+          "explanation": "Using Zoom without enabling AI features or cloud recording means only limited metadata is likely used in machine-learning systems."
+        },
+        {
+          "id": "rule_zoom_unlikely_old_only",
+          "if_all": [
+            "zoom_q1==yes",
+            "zoom_q2==no"
+          ],
+          "result": "unlikely",
+          "weight": 0.8,
+          "explanation": "If you have not used Zoom since before the 2023 terms changes, your recent data is unlikely to be involved in newer AI features."
+        }
+      ],
+      "action": {
+        "can_opt_out": true,
+        "how_to": [
+          {
+            "id": "step1",
+            "title": "Disable AI features (admin)",
+            "description": "If you are an account admin, sign in to the Zoom web portal and disable Zoom AI Companion and related AI features for the account or specific groups.",
+            "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065285"
+          },
+          {
+            "id": "step2",
+            "title": "Avoid cloud recordings",
+            "description": "Use local recordings instead of cloud recordings if possible, or disable recordings altogether for sensitive meetings.",
+            "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0066685"
+          },
+          {
+            "id": "step3",
+            "title": "Use GDPR rights via your organisation",
+            "description": "For EU users, raise concerns with your organisation's Zoom admin or Data Protection Officer and exercise your GDPR rights (access, objection, deletion) where appropriate.",
+            "url": "https://www.zoom.com/en/trust/gdpr/"
+          }
+        ],
+        "links": [
+          {
+            "label": "Background on Zoom's 2023 ToS & AI controversy (analysis)",
+            "url": "https://termly.io/resources/zoom-terms-of-service-controversy/"
+          },
+          {
+            "label": "Zoom – GDPR and privacy information",
+            "url": "https://www.zoom.com/en/trust/gdpr/"
+          }
+        ],
+        "templates": []
+      }
     }
   ],
   "news": [
     {
-      "id": "welcome-1",
-      "date": "2025-11-12",
-      "title": "Initial bundle published",
-      "summary": "Use this to test the app's update & signature verification flow.",
-      "url": "https://example.org/bundles/1.0.0"
+      "id": "gdpr_ai_2025",
+      "title": "EU AI Act Implementation Extended",
+      "summary": "The European Parliament has extended the AI Act implementation deadline to May 2025.",
+      "countries": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE",
+        "IS",
+        "LI",
+        "NO",
+        "GB"
+      ],
+      "services": [
+        "meta",
+        "linkedin"
+      ],
+      "effective_from": "2025-03-15",
+      "act_by": "2025-05-01",
+      "impact": "high"
+    },
+    {
+      "id": "welcome_bundle",
+      "title": "Welcome to EU AI Training Checker",
+      "summary": "This app helps determine if your data was used to train AI models. All processing is done locally.",
+      "impact": "low"
     }
   ]
 }
